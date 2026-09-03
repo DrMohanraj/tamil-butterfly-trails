@@ -201,7 +201,10 @@ function PhotoAdmin() {
             taken_on: form.taken_on || null,
             image_url: form.image_url,
           });
-          if (error) return toast.error(error.message);
+          if (error) {
+            toast.error(error.message);
+            return;
+          }
           toast.success("புகைப்படம் சேர்க்கப்பட்டது");
           setForm({ title: "", caption: "", species: "", location: "", taken_on: "", image_url: "" });
           invalidate("photos");
@@ -272,7 +275,10 @@ function NoteAdmin() {
             body: form.body,
             image_url: form.image_url || null,
           });
-          if (error) return toast.error(error.message);
+          if (error) {
+            toast.error(error.message);
+            return;
+          }
           toast.success("குறிப்பு சேர்க்கப்பட்டது");
           setForm({ title: "", body: "", image_url: "" });
           invalidate("notes");
@@ -334,7 +340,10 @@ function ArticleAdmin() {
             cover_url: form.cover_url || null,
             content: form.content,
           });
-          if (error) return toast.error(error.message);
+          if (error) {
+            toast.error(error.message);
+            return;
+          }
           toast.success("கட்டுரை சேர்க்கப்பட்டது");
           setForm({ slug: "", title: "", excerpt: "", cover_url: "", content: "" });
           invalidate("articles");
@@ -402,7 +411,10 @@ function DeleteButton({
       aria-label="நீக்கு"
       onClick={async () => {
         const { error } = await supabase.from(table).delete().eq("id", id);
-        if (error) return toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
         toast.success("நீக்கப்பட்டது");
         onDone();
       }}
